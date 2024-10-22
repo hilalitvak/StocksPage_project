@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Queries</title>
+</head>
+<body style="background-color:lavenderblush; text-align:center; font-family: Tahoma; margin-top: 10px" > 
+<h1 style="color: red">Query 1:</h1>
+<table align="center"  border="1">
+    <th>Name</th>
+    <th>Total Sum</th>
+    {% for content in sql_resA %}
+        <tr>
+            <td> {{ content.Name }}</td>
+            <td> {{ content.TotalSum }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<h1 style="color: red">Query 2:</h1>
+<table align="center"  border="1">
+    <th>Symbol</th>
+    <th>Name</th>
+    <th>Quantity</th>
+     {% for content in sql_resB %}
+        <tr>
+            <td> {{ content.Symbol }}</td>
+            <td> {{ content.Name }}</td>
+            <td> {{ content.Quantity }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+<br>
+<h1 style="color: red">Query 3:</h1>
+<table align="center"  border="1">
+    <th>Symbol</th>
+    <th>Buyers Number</th>
+    {% for content in sql_resC %}
+        <tr>
+            <td> {{ content.Symbol }}</td>
+            <td> {{ content.TotalInvestors }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br><br>
+
+<a href="/" ”>Home</a>
+<br> <br>
+<a href="/stocks/" >Buy Stocks</a>
+<br> <br>
+
+<a href="/transaction/" >Add Transaction</a>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction page</title>
+</head>
+<body style="background-color:lavenderblush; text-align:center; font-family: Tahoma; margin-top: 10px" > 
+<H1 style="color: red">Add New Transaction</H1>
+<form method="POST" action="input_Transaction">
+    {% csrf_token %}
+    <label style="font-size: 20px; text-align: center">ID:</label>
+        <input  type="number" name="id" required>
+    <br>
+    <label style="font-size: 20px; text-align: center">Transaction Sum:</label>
+        <input type="number" name="sum" required>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+{% if flag_id %}
+   <p> <b>ERROR! THIS ID DOES NOT EXIST </b></p>
+{% endif %}
+{% if flag_duplicate %}
+<p> <b>ERROR! You already had a transaction today </b></p>
+{% endif %}
+
+<br> 
+<H1 style="color: red">Last 10 Transactions:</H1>
+<table align="center"  border="1">
+    <th>Date</th>
+    <th>Investor ID</th>
+    <th>Transaction Sum</th>
+    {% for content in sql_res1 %}
+        <tr>
+            <td> {{ content.tDate }}</td>
+            <td> {{ content.ID }}</td>
+            <td> {{ content.TAmount }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<a href="/" >Home</a>
+<br> <br>
+<a href="/stocks/">Buy Stocks</a>
+<br> <br>
+<a href="/query/" >Query Results</a>
+<br> <br>
+</body>
+</html>

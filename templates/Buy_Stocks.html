@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy Stocks Page</title>
+</head>
+<body style="background-color:lavenderblush; text-align:center; font-family: Tahoma; margin-top: 10px" > 
+<H1 style="color: red">Buy Stocks</H1>
+<form method="POST" action="input_stock">
+    {% csrf_token %}
+    <label style="font-size: 20px; text-align: center">ID:</label>
+    <input type="number" name="id" rows="1" cols="50" required >
+    <br>
+    <label style="font-size: 20px; text-align: center">Company:</label>
+    <textarea name = "company" rows="1" cols="50" required ></textarea>
+    <br>
+    <label style="font-size: 20px; text-align: center">Quantity:</label>
+        <input type="number" name="quantity" rows="1" cols="50" required >
+
+    <input type="submit" value="Submit">
+</form>
+{% if id_flag %}
+    <p style="font-size: 20px; "><b>ERROR! THIS ID DOES NOT EXIST IN THE DB </b></p><br>
+{% endif %}
+
+{% if company_flag %}
+    <p style="font-size: 20px;"><b>ERROR! THIS COMPANY DOES NOT EXIST IN THE DB </b></p><br>
+
+{% endif %}
+{% if sum_flag %}
+    <p style="font-size: 20px; "><b>ERROR! NOT ENOUGH MONEY IN THE ACCOUNT</b></p><br>
+{% endif %}
+{% if dup_flag %}
+    <p style="font-size: 20px; "><b>ALREADY EXISTS A RECORD PURCHASE FROM THIS COMPANY</b></p>
+{% endif %}
+
+<br>
+<H1 style="color: red">Last 10 Stock Buys:</H1>
+<table align="center"  border="1">
+        <th>Date</th>
+        <th>Investor ID</th>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        {% for content in sql_res2 %}
+        <tr>
+            <td> {{ content.tDate }}</td>
+            <td> {{ content.ID }}</td>
+            <td> {{ content.Symbol }}</td>
+            <td> {{ content.BQuantity }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<a href="/">Home</a>
+<br> <br>
+<a href="/transaction/">Add Transaction</a>
+<br> <br>
+<a href="/query/">Query Results</a>
+</body>
+</html>
